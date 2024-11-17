@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]  # Specify build requirements
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cnnClassifier"  # Required
+version = "0.0.0"  # Required
+description = "CNN based Kidney Disease Classification Project"
+readme = "README.md"
+requires-python = ">=3.10, <4"
+license = {text = "MIT License"}
+authors = [
+    {name = "Nida-16", email = "nidashaikh1602@gmail.com"}
+]
+keywords = ["cnn", "classifier", "classification"]
+
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "License :: OSI Approved :: MIT License"
+]
+
+
+[project.urls]
+home-page = "https://github.com/Nida-16/CNN-Kidney-Disease-Classification"
+bug-tracker = "https://github.com/Nida-16/CNN-Kidney-Disease-Classification/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]

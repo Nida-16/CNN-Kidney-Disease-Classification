@@ -23,7 +23,7 @@ list_of_files = ['.github/workflows/.gitkeep',
                  'dvc.yaml',
                  'params.yaml',
                  'requirements.txt',
-                 'setup.py',
+                 'pyproject.toml',
                  'research/trials.ipynb',
                  'templates/index.html'
                  ]
