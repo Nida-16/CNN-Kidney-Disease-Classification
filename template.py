@@ -26,6 +26,7 @@ list_of_files = ['.github/workflows/.gitkeep',
                  'pyproject.toml',
                  'research/trials.ipynb',
                  'templates/index.html',
+                 'main.py'
                  ]
 
 for filepath in list_of_files:

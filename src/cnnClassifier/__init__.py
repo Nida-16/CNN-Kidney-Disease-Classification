@@ -23,7 +23,7 @@ def error_mssg_detail(error, error_detail: sys):
     _, _, exc_tb = error_detail.exc_info()
 
     err_file = exc_tb.tb_frame.f_code.co_filename
-    error_tb = exc_tb.tb_frame.f_code.__qualname__
+    error_tb = exc_tb.tb_frame.f_code.co_name
     err_line_no = exc_tb.tb_frame.f_lineno
     err_info = str(error)
     error_mssg = f'Error occured in script,line no. - {err_file}:{err_line_no}.\n"{err_info}"\nTraceback:{error_tb}'
