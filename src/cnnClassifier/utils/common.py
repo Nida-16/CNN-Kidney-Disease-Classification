@@ -6,13 +6,13 @@ import json
 import joblib
 from typing import Any
 from pathlib import Path
-from box import ConfigBox
+from box import Box
 from ensure import ensure_annotations
 from cnnClassifier import logger, CustomExceptionHandling
 
 
 @ensure_annotations
-def read_yaml(path_to_yaml: Path) -> ConfigBox:
+def read_yaml(path_to_yaml: Path) -> Box:
     """reads yaml file and returns
 
     Args:
@@ -29,7 +29,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         with open(path_to_yaml, 'r') as f:
             yaml_content = yaml.safe_load(f)
             logger.info(f'{path_to_yaml} Yaml file loaded successfully')
-            return ConfigBox(yaml_content)
+            return Box(yaml_content)
     except Exception as e:
         raise CustomExceptionHandling(e, sys)
 
@@ -62,7 +62,7 @@ def save_json(path: Path, data: dict):
 
 
 @ensure_annotations
-def load_json(path: Path) -> ConfigBox:
+def load_json(path: Path) -> Box:
     """load json files data
 
     Args:
@@ -74,7 +74,7 @@ def load_json(path: Path) -> ConfigBox:
     with open(path, 'r') as json_file:
         json_content = json.load(json_file)
         logger.info(f'Json file {path} read successfully ')
-        return (ConfigBox(json_content))
+        return (Box(json_content))
 
 
 @ensure_annotations

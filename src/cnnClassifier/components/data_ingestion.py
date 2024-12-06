@@ -33,5 +33,5 @@ class DataIngestion:
                 zf.extractall(unzip_location)
                 logger.info(
                     f'Zipfile extracted from {zipfile_filepath} to folder {unzip_location}')
-        except Exception as e :
-            raise CustomExceptionHandling(e,sys)
+        except Exception as e:
+            raise CustomExceptionHandling(e, sys)
