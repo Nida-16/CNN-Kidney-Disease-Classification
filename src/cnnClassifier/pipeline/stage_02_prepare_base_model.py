@@ -14,9 +14,10 @@ class PrepareBaseModelTrainingPipeline:
         config_obj = ConfigurationManager()
         prepare_base_model_config = config_obj.get_prepare_base_model_config()
 
-        prepare_base_model_obj = PrepareBaseModel(prepare_base_model_config)
-        prepare_base_model_obj.get_base_model()
-        prepare_base_model_obj.update_base_model()
+        prepare_base_model_component = PrepareBaseModel(
+            prepare_base_model_config)
+        prepare_base_model_component.get_base_model()
+        prepare_base_model_component.update_base_model()
 
 
 if __name__ == '__main__':
