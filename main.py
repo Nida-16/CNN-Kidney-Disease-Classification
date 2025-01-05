@@ -3,6 +3,7 @@ from cnnClassifier.utils.common import logger, CustomExceptionHandling
 from cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from cnnClassifier.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 from cnnClassifier.pipeline.stage_03_model_training import ModelTrainingPipeline
+from cnnClassifier.pipeline.stage_04_evaluation import EvaluationPipeline
 
 
 STAGE_NAME = '01 - Data Ingestion stage'
@@ -26,11 +27,23 @@ try:
 except Exception as e:
     raise CustomExceptionHandling(e, sys)
 
+
 STAGE_NAME = '03 - Model Training stage'
 try:
     logger.info(f'>>>>> stage {STAGE_NAME} started <<<<<')
     model_training_obj = ModelTrainingPipeline()
     model_training_obj.main()
+    logger.info(
+        f'>>>>> stage {STAGE_NAME} completed <<<<<\n\nx==================x')
+except Exception as e:
+    raise CustomExceptionHandling(e, sys)
+
+
+STAGE_NAME = '04 - Evaluation stage'
+try:
+    logger.info(f'>>>>> stage {STAGE_NAME} started <<<<<')
+    evaluation_obj = EvaluationPipeline()
+    evaluation_obj.main()
     logger.info(
         f'>>>>> stage {STAGE_NAME} completed <<<<<\n\nx==================x')
 except Exception as e:

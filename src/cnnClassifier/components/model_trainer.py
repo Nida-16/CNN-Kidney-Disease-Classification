@@ -1,8 +1,4 @@
-import os
-import time
 import tensorflow as tf
-from pathlib import Path
-from zipfile import ZipFile
 from cnnClassifier.entity.config_entity import ModelTrainingConfig
 
 
@@ -13,7 +9,7 @@ class ModelTrainer:
     def get_base_model(self):
         self.model = tf.keras.models.load_model(
             self.config.updated_base_model_path)
-        
+
         self.model.compile(
             optimizer=tf.keras.optimizers.SGD(learning_rate=0.01),
             loss=tf.keras.losses.BinaryCrossentropy(),
