@@ -166,7 +166,5 @@ cython_debug/
 
 artifacts/*
 secrets.yaml
-.dvc/.gitignore
-.dvc/config
-.dvcignore
-dvc.lock
+/data
+.dvc/cache
