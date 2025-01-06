@@ -6,7 +6,6 @@ stages:
       - config/config.yaml
     outs:
       - artifacts/data_ingestion/kidney-ct-scan-image
-      - artifacts/data_ingestion/data.zip
 
 
   prepare_base_model:
@@ -46,7 +45,7 @@ stages:
       - src/cnnClassifier/pipeline/stage_04_evaluation.py
       - artifacts/data_ingestion/kidney-ct-scan-image
       - config/config.yaml
-      - artifacts/prepare_base_model/updated_model.h5
+      - artifacts/model_training/trained_model.h5
     params:
       - IMAGE_SIZE
       - BATCH_SIZE
