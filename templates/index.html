@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidney Disease Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px; /* Adjusted width to fit the title */
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin: 15px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        #preview {
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kidney Disease Classifier</h1>
+        <p>Upload an image of a kidney ct-scan to predict if it is a Normal kidney or detects a Tumour.</p>
+        <form id="uploadForm">
+            <input type="file" id="imageInput" accept="image/*" required />
+            <br>
+            <img id="preview" src="" alt="Image Preview" style="display: none;" />
+            <br>
+            <button type="button" id="predictBtn">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', (event) => {
+            const input = event.target;
+            const preview = document.getElementById('preview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.style.display = 'none';
+                preview.src = '';
+            }
+        });
+
+        document.getElementById('predictBtn').addEventListener('click', () => {
+            const input = document.getElementById('imageInput');
+            if (input.files.length === 0) {
+                alert('Please select an image to upload.');
+                return;
+            }
+        
+            const file = input.files[0];
+            const reader = new FileReader();
+        
+            reader.onload = function () {
+                const base64Image = reader.result.split(',')[1];
+        
+                fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ image: base64Image })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Assuming 'data' is an object with a key 'image' holding the prediction value
+                    document.getElementById('result').innerText = `Prediction: ${data[0].image}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerText = 'An error occurred.';
+                });
+            };
+        
+            reader.readAsDataURL(file);
+        });
+        
+    </script>
+</body>
+</html>
