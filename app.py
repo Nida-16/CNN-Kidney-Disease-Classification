@@ -33,6 +33,12 @@ def predictRoute():
     result = clApp.classifier.predict_result()
     return jsonify(result)
 
+@app.route('/train',methods=['GET','POST'])
+@cross_origin()
+def trainRoute():
+    os.system('dvc repro')
+    return 'Trained model successfully'
+
 
 if __name__ == '__main__':
     clApp = ClientApp()
